@@ -1,412 +1,67 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>海创园 → 宁国红杉林｜高德地图行程卡</title>
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>宁国红杉林 · 皖南东线自驾</title>
 <style>
-:root{color-scheme:light;--ink:#182b26;--muted:#456056;--line:#c9d8d0;--paper:#f2f6f2;--green:#155b43}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}
-header,main{max-width:1180px;margin:auto;padding:20px}header{padding-bottom:8px}h1,h2,h3,p{margin:0 0 8px}
-.lead,.note,small{color:var(--muted)}a{color:var(--green)}button{font:inherit;cursor:pointer}
-:focus-visible{outline:3px solid #9c5500;outline-offset:3px}
-.metrics,.cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));margin:12px 0}
-.panel,.card{background:white;border:1px solid var(--line);border-radius:14px;padding:14px}
-.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:start;margin-bottom:20px}
-nav{display:flex;overflow-x:auto;gap:7px;padding:6px 4px;margin-bottom:10px}
-nav button,.route button{border:1px solid var(--line);border-radius:9px;color:var(--ink);background:white;padding:6px 10px}
-nav button[aria-pressed=true]{background:var(--green);color:white}
-.badge{display:inline-block;background:#e3efea;color:#194535;border-radius:5px;padding:1px 6px}
-.timeline,.route{list-style:none;padding-left:0;margin:12px 0 0}
-.timeline li,.route li{border-left:2px solid var(--line);padding:3px 0 9px 12px;margin-left:6px;overflow-wrap:anywhere}
-section{scroll-margin-top:12px}ul{padding-left:24px}.day{margin-bottom:14px}
-@media(max-width:710px){header,main{padding:14px}.layout{grid-template-columns:1fr}}
-@media print{body{background:white}header,main{padding:0}nav,.layout,.no-print{display:none}.day,.card{break-inside:avoid}}
-
-:root{--ink:#292b26;--muted:#4e5a51;--line:#d6d4c7;--paper:#f5f2ea;--green:#1e5a4a}
-header{padding-top:32px}header h1{font-size:clamp(2rem,5vw,3.1rem);letter-spacing:-.04em}
-.kicker{color:#914023;font-size:.9rem;font-weight:750;letter-spacing:.12em} header .card{border-top:3px solid #a34c2c}
-.badge{background:#f4e3d6;color:#71341e}.timeline li{border-left-color:#c18361}
-.quick{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
-.quick a{padding:7px 9px;border:1px solid var(--line);border-radius:9px;text-decoration:underline;background:#fff}
-small{font-size:.9rem} #full{border-top:2px solid #c18361;padding-top:16px}
-@media print {header{padding-top:0}.day{break-inside:auto}.timeline li{break-inside:avoid}}
-
-.map-section{margin:0 0 18px}
-#map-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-#map-tabs button{border:1px solid var(--line);border-radius:9px;padding:8px 12px;background:#fff;color:var(--ink);min-height:42px}
-#map-tabs button[aria-pressed=true]{background:var(--green);color:white}
-.map-shell{overflow:hidden;border-radius:12px;background:#e8eee8;border:1px solid var(--line)}
-#route-map{display:block;width:100%;height:clamp(340px,56vh,550px);border:0}
-.map-actions{display:flex;flex-wrap:wrap;gap:4px 18px;margin:9px 0}
-@media(max-width:480px){#route-map{height:390px}#map-tabs button{padding-inline:7px}}
-details{margin-top:10px}details svg{display:block;width:100%;max-width:650px;margin-top:.5rem}summary{cursor:pointer}</style>
-</head>
-<body>
-<header>
-  <p class="kicker">皖南秋末 · 自驾行程卡</p>
-  <h1 id="title">海创园 → 宁国红杉林</h1>
-  <p class="lead" id="subtitle"></p>
-  <div id="metrics" class="metrics"></div>
-  <div id="quick" class="quick no-print" aria-label="高德驾车路线"></div>
-  <a class="no-print" href="#full">跳到完整文字版</a>
-</header>
-<main>
-  <section class="panel map-section no-print" aria-labelledby="map-title">
-    <h2 id="map-title">高德驾车地图</h2>
-    <div id="map-tabs" role="group" aria-label="切换地图线路"></div>
-    <p id="map-context" class="note" aria-live="polite"></p>
-    <div class="map-shell">
-      <iframe id="route-map" title="高德去程驾车地图" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    </div>
-    <div class="map-actions"><a id="map-open" target="_blank" rel="noopener">地图不显示？单独打开高德地图</a><a id="map-nav" target="_blank" rel="noopener">打开高德分段导航</a></div>
-    <p class="note">高德地图需要联网。若内嵌区域空白，请使用上面的独立地图链接，或看下方站点示意。</p>
-    <details open><summary>备用 · 站点地理示意（不代表道路）</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 188" role="img" aria-label="站点地理示意，线段不代表道路"><rect width="500" height="188" rx="12" fill="#f0f4e9"/><path d="M45 28v26h400v45H45v44h400M90 18v142m95-142v142m95-142v142m95-142v142" fill="none" stroke="#dbe1d4"/><text x="455" y="31" fill="#40544a" font-size="14">北 ↑</text><polyline points="445,162 57,93" fill="none" stroke="#9b4b2c" stroke-width="2" stroke-dasharray="6 6"/><polyline points="57,93 101,52 119,36 136,34 445,162" fill="none" stroke="#256252" stroke-width="2" stroke-dasharray="4 6"/><circle cx="445" cy="162" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="445" y="186" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">海创园</text><circle cx="57" cy="93" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="43" y="117" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">红杉林</text><circle cx="101" cy="52" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="77" y="77" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">储家滩</text><circle cx="119" cy="36" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="97" y="25" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">东入口</text><circle cx="136" cy="34" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="163" y="57" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">河沥溪</text></svg></details>
-  </section>
-  <nav id="switcher" aria-label="切换行程日期"></nav>
-  <div class="layout">
-    <section class="panel" id="current" aria-label="行程卡片" aria-live="polite"></section>
-    <section class="panel" aria-label="路线示意">
-      <h2>站点顺序</h2>
-      <p class="note">站点按计划顺序排列，不是按比例绘制的地图，也不是导航轨迹。</p>
-      <div id="route"></div>
-    </section>
-  </div>
-  <section id="full" tabindex="-1" aria-labelledby="full-title">
-    <h2 id="full-title">完整文字版</h2>
-    <div id="written"></div>
-  </section>
+:root{color-scheme:light;--ink:#192a23;--muted:#4b5f54;--green:#105243;--deep:#0b362e;--paper:#f5f4ed;--line:#d7dfd3;--card:#fff;--rust:#ad4f2e}*{box-sizing:border-box}body{margin:0;font: 1rem/1.58 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper)}h1,h2,h3,p{margin:0}a{color:#105243;text-underline-offset:3px}a,button{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #b06335;outline-offset:2px}.mast{position:relative;z-index:3;background:linear-gradient(108deg,#094838 0,#153e33 61%,#353f30);color:white;display:flex;justify-content:space-between;align-items:center;gap:18px;min-height:78px;padding:10px 20px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.mark{width:46px;height:46px;border:1px solid #ffffff50;border-radius:15px;display:grid;place-items:center;background:#ffffff18;flex:0 0 auto;color:#fbc598}.mark svg{width:25px;height:25px}.brand h1{font-size:clamp(1.15rem,2vw,1.52rem);line-height:1.22;letter-spacing:.02em}.brand p{color:#d8e5de;font-size:.875rem;margin-top:3px}.mast-right{display:flex;gap:8px;align-items:center;flex-shrink:0}.mast-right a,.metric{border:1px solid #ffffff3a;border-radius:12px;color:white;text-decoration:none;background:#ffffff15;white-space:nowrap;padding:6px 11px}.mast-right a:hover{background:#ffffff29}.metric strong,.metric span{display:block}.metric span{font-size:.84rem;color:#e0e8db}.workspace{display:grid;grid-template-columns:minmax(345px,31.5%) minmax(0,1fr);height:calc(100dvh - 78px);min-height:580px}.rail{padding:16px 17px 25px;overflow:auto;overscroll-behavior:contain;border-right:1px solid var(--line);scrollbar-color:#a4b3a4 transparent}.hero{padding:17px;background:linear-gradient(145deg,#fff 15%,#edf4eb);border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 14px #223a2420}.eyebrow{color:#306451;font-size:.86rem;font-weight:750;letter-spacing:.09em}.hero h2{line-height:1.22;margin:.25rem 0 .55rem;font-size:1.28rem}.hero p,.detail-intro{color:var(--muted)}.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.tile{padding:9px 10px;background:#fff;border:1px solid var(--line);border-radius:11px;min-width:0;font-size:.92rem;line-height:1.4}.tile small{display:block;color:var(--muted);font-size:.82rem}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}.chip{padding:3px 8px;background:#e1eee3;border-radius:999px;font-size:.85rem;font-weight:650}.route-nav{display:flex;gap:7px;padding:13px 0 9px}.route-nav button,.map-controls button,.map-controls a{border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);min-height:40px;padding:7px 10px;font-weight:700;text-align:center}.route-nav button{flex:1}.route-nav button[aria-pressed=true]{background:var(--green);color:white;border-color:var(--green)}.detail h2{font-size:1.3rem;margin:.15rem 0 .3rem}.detail-intro{margin:0 0 8px}.detail article,.stop,.fallback,.written-box{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px;margin:8px 0}.detail article h3,.stop h3{font-size:1.02rem}.detail article p,.stop p{font-size:.94rem;color:var(--muted);margin:.3rem 0}.slot{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}.tag{font-size:.82rem;font-weight:700;border-radius:7px;background:#edf4ed;color:#255849;padding:2px 6px}.tag.optional{color:#803a26;background:#f8eee7}.stops{padding:0;list-style:none;margin:.4rem 0}.stop a{display:inline-block;margin-top:1px;font-size:.92rem}.map-pane{position:relative;min-height:0;background:#e8f0e8;overflow:hidden}.map-pane iframe{width:100%;height:100%;border:0;display:block}.map-controls{position:absolute;z-index:2;right:13px;top:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:70%}.map-controls button,.map-controls a{font-size:.85rem;min-height:34px;padding:5px 9px;text-decoration:none;box-shadow:0 2px 9px #263e2b22}.map-key{position:absolute;right:12px;bottom:22px;z-index:2;background:#fffdf7ee;border:1px solid var(--line);border-radius:12px;padding:9px 11px;font-size:.83rem;line-height:1.45;max-width:255px}.map-key span{display:inline-block;width:20px;height:4px;border-radius:3px;background:#21816b;vertical-align:middle;margin-right:6px}.map-key a{display:block;margin-top:3px}.offline-deck{margin-top:11px;font-size:.9rem}.offline-deck svg{width:100%;display:block;margin-top:.3rem}.footnote{font-size:.88rem;color:var(--muted);margin:8px 0}.written{display:none;max-width:740px;margin:auto;padding:18px}.written h2{line-height:1.25}.written h3{margin:12px 0 4px}.written li{margin:4px 0}.written .stops li{margin:8px 0}body.text-mode .workspace{display:none}body.text-mode .written{display:block}body.text-mode .metric{display:none}
+@media (min-width:761px){.rail{scroll-behavior:auto}}
+@media (max-width:1000px){.mast-right .metric:last-child{display:none}.workspace{grid-template-columns:minmax(315px,37%) minmax(0,1fr)}}
+@media (max-width:760px){.mast{padding:9px 10px;gap:7px;position:sticky;top:0;min-height:66px}.brand{gap:7px}.mark{width:34px;height:34px;border-radius:10px}.mark svg{width:20px}.brand h1{font-size:1.02rem}.brand p{font-size:.74rem;line-height:1.2}.mast-right .metric{display:none}.mast-right a{padding:6px;font-size:.82rem}.workspace{display:flex;flex-direction:column;height:auto;min-height:0}.map-pane{order:-1;height:clamp(300px,49svh,450px)}.rail{padding:10px 12px 24px;border:0;overflow:visible}.hero{padding:13px}.map-controls{top:7px;right:6px;max-width:58%}.map-controls button,.map-controls a{padding:4px 5px;min-height:28px;font-size:.72rem}.map-key{bottom:17px;right:6px;max-width:178px;font-size:.73rem;padding:5px 7px}.route-nav{position:sticky;top:66px;background:var(--paper);z-index:2}.metric{display:none}}
+@media print{.mast{position:static;background:white;color:#000;padding:0}.brand p{color:#444}.mark,.mast-right,.workspace,.no-print{display:none!important}.written{display:block;max-width:none;padding:0}.stop{break-inside:avoid}}
+</style></head>
+<body><header class="mast"><div class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 3 9 18h6L6 28h11v6h6v-6h11l-9-10h6L20 3Z"/><path d="M4 37c6-3 9 2 16 0s10-1 16 0"/></svg></span><div><h1>宁国红杉林自驾</h1><p>海创园 → 方塘 → 青龙湾 → 宁国东出</p></div></div><div class="mast-right"><a id="text-link" href="?view=itinerary">完整文字版 →</a><div class="metric"><strong>2 天</strong><span>自驾行程</span></div><div class="metric"><strong>海创园</strong><span>起点与返程终点</span></div><div class="metric"><strong>红杉林 · 储家滩</strong><span>两处主要停靠</span></div></div></header>
+<main class="workspace" id="workspace">
+<aside class="rail" id="rail" aria-label="行程面板">
+<section class="hero"><p class="eyebrow">皖南秋末 · 青龙湾东线</p><h2>夜里进方塘，白天沿湖东出</h2><p>先到宁国方塘看水上落羽杉，回程贴着青龙湾走，在储家滩短停。河沥溪老街可选，不为六道弯往西绕。</p><div class="duo"><div class="tile"><small>去程</small><strong>海创园 → 红杉林</strong></div><div class="tile"><small>返程</small><strong>储家滩 → 东入口 → 杭州</strong></div></div><div class="chips"><span class="chip">红杉林岸拍</span><span class="chip">储家滩湖湾</span><span class="chip">老街可选</span></div></section>
+<nav class="route-nav" id="filters" aria-label="按天切换"></nav><section class="detail" id="detail" aria-live="polite"></section>
+<details class="offline-deck"><summary>高德未加载时：看站点方向图</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 188" role="img" aria-label="站点地理示意，线段不代表道路"><rect width="500" height="188" rx="12" fill="#f0f4e9"/><path d="M45 28v26h400v45H45v44h400M90 18v142m95-142v142m95-142v142m95-142v142" fill="none" stroke="#dbe1d4"/><text x="455" y="31" fill="#40544a" font-size="14">北 ↑</text><polyline points="445,162 57,93" fill="none" stroke="#9b4b2c" stroke-width="2" stroke-dasharray="6 6"/><polyline points="57,93 101,52 119,36 136,34 445,162" fill="none" stroke="#256252" stroke-width="2" stroke-dasharray="4 6"/><circle cx="445" cy="162" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="445" y="186" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">海创园</text><circle cx="57" cy="93" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="43" y="117" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">红杉林</text><circle cx="101" cy="52" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="77" y="77" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">储家滩</text><circle cx="119" cy="36" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="97" y="25" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">东入口</text><circle cx="136" cy="34" r="5" fill="#236151" stroke="white" stroke-width="2"/><text x="163" y="57" text-anchor="middle" fill="#233f32" font-size="15" font-weight="700">河沥溪</text></svg><p class="footnote">仅表示站点方位与顺序，不是道路轨迹。</p></details></aside>
+<section class="map-pane" id="map" aria-label="高德路线地图"><iframe id="frame" title="高德路线地图" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="map-controls"><button type="button" id="all">全部路线</button><button type="button" id="fit">适合视图</button><button type="button" id="bay">青龙湾路段</button></div><div class="map-key"><p><span></span>高德实际道路算路</p><p id="map-status"></p><a id="map-open" target="_blank" rel="noopener">单独打开高德地图 ↗</a></div></section>
 </main>
-<noscript>请开启 JavaScript 查看本地行程，或使用同时交付的 Markdown 文字版。</noscript>
+<section class="written" id="written" aria-label="完整文字攻略"></section>
+<noscript>请开启 JavaScript 查看行程卡片和路线地图。</noscript>
 <script>
-const trip = {
-  "title": "杭州出发｜宁国红杉林自驾路线",
-  "subtitle": "海创园地铁站 → 方塘红杉林 → 储家滩 → 皖南川藏线东入口 → 杭州",
-  "summary": "路线分两部分：杭州进方塘；游览后沿青龙湾东出，在储家滩停一站，河沥溪老街可选。地图使用高德，按出发当日路况及现场指引行驶。",
-  "metrics": [
-    [
-      "出发参考",
-      "19 号线海创园站"
-    ],
-    [
-      "主要景点",
-      "方塘落羽杉湿地"
-    ],
-    [
-      "湖湾停靠",
-      "储家滩"
-    ],
-    [
-      "返程",
-      "宁国东出"
-    ]
-  ],
-  "transport": [
-    [
-      "去程",
-      "海创园地铁站 → 宁国方塘。景区参考点不等于停车入口，请用现场公布的停车点。"
-    ],
-    [
-      "返程",
-      "红杉林 → 储家滩 → 皖南川藏线东入口 → 杭州。河沥溪老街为可选午饭站。"
-    ],
-    [
-      "通行提示",
-      "景区周边在秋季旺季可能限流、绕行或临时禁行；以交警公告和现场指挥为准。"
-    ]
-  ],
-  "lodging": [],
-  "days": [
-    {
-      "label": "D1",
-      "date": "去程",
-      "title": "杭州到方塘",
-      "stats": "海创园 → 落羽杉湿地公园",
-      "stops": [
-        {
-          "time": "去程",
-          "kind": "自驾",
-          "name": "海创园地铁站 → 方塘红杉林",
-          "note": "使用景区认可的停车点；山路不占道停车。",
-          "map": "https://uri.amap.com/navigation?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&mode=car&policy=0&coordinate=gaode&callnative=1"
-        }
-      ],
-      "alternative": "遇分流不走山间小路，遵照现场接驳指引。"
-    },
-    {
-      "label": "D2",
-      "date": "游览与返程",
-      "title": "沿青龙湾往东出山",
-      "stats": "红杉林 → 储家滩 → 东入口 → 杭州",
-      "stops": [
-        {
-          "time": "第 1 站",
-          "kind": "景点",
-          "name": "落羽杉湿地公园",
-          "note": "留 35–60 分钟给开放岸线与水面倒影。水上项目须在正规运营条件允许时参加。"
-        },
-        {
-          "time": "第 2 站",
-          "kind": "湖湾",
-          "name": "储家滩游客服务中心",
-          "note": "留 25–40 分钟看湖湾和山影。西津野渡码头和游客中心相邻，可顺路看，不必单独开车。",
-          "map": "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&mode=car&policy=0&coordinate=gaode&callnative=1"
-        },
-        {
-          "time": "出山",
-          "kind": "路线点",
-          "name": "皖南川藏线东入口",
-          "note": "只作方向参考；没有合法停车位就不停。",
-          "map": "https://uri.amap.com/navigation?from=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&to=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&mode=car&policy=0&coordinate=gaode&callnative=1"
-        },
-        {
-          "time": "可选",
-          "kind": "午饭",
-          "name": "宁国市河沥溪老街",
-          "note": "想多留一站可在这里午饭、走到永福桥，不停则直接返杭。",
-          "map": "https://uri.amap.com/navigation?from=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&to=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&mode=car&policy=0&coordinate=gaode&callnative=1"
-        },
-        {
-          "time": "返程",
-          "kind": "自驾",
-          "name": "返回海创园",
-          "note": "不建议为六道弯向西折返。",
-          "map": "https://uri.amap.com/navigation?from=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"
-        }
-      ],
-      "alternative": "遇分流或下雨，按开放道路提前出山，跳过储家滩或老街。",
-      "alternativeMap": "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"
-    }
-  ],
-  "costs": [
-    [
-      "费用",
-      "路桥、油电和停车以实际为准；景区项目以当天票价为准。"
-    ]
-  ],
-  "prep": [
-    "先查交通公告和当天的高德路况；开车不沿山路临时停车。",
-    "随时可以点开独立高德地图查看真实道路。备用示意只按站点坐标定位，不作导航。"
-  ],
-  "sources": [
-    [
-      "宣城市政府｜11 月 20 日赏杉窗口",
-      "https://www.xuancheng.gov.cn/Content/show/1738050.html"
-    ],
-    [
-      "宁国交警｜2026 年 11 月 20 日–12 月 13 日临时交通管制",
-      "https://weibo.com/2/detail/5366884321201217"
-    ],
-    [
-      "方塘乡政府｜入林项目票答复（历史规则）",
-      "https://www.ningguo.gov.cn/InKnowledgeBase/show/5254.html"
-    ],
-    [
-      "高德｜落羽杉湿地公园 POI、电话与坐标",
-      "https://www.amap.com/place/B0GRUXBKP0"
-    ],
-    [
-      "宁国市住建局｜河沥溪老街",
-      "https://www.ningguo.gov.cn/OpennessContent/show/3848972.html"
-    ],
-    [
-      "高德｜SkillZone",
-      "https://lbs.amap.com/ai/skillzone"
-    ],
-    [
-      "高德｜amap-lbs-skill 与 Web Service Key",
-      "https://developer.amap.com/api/skill/ready-to-use/summary"
-    ],
-    [
-      "高德｜驾车 Web Service 2.0",
-      "https://lbs.amap.com/api/webservice/guide/api/newroute"
-    ],
-    [
-      "高德｜URI API 路径规划",
-      "https://lbs.amap.com/api/uri-api/guide/travel/route"
-    ],
-    [
-      "高德｜储家滩游客服务中心",
-      "https://www.amap.com/place/B0H3KHYGA0"
-    ],
-    [
-      "高德｜皖南川藏线东入口",
-      "https://www.amap.com/place/B0FFL4EJ6S"
-    ],
-    [
-      "高德｜河沥溪老街",
-      "https://www.amap.com/place/B0LG3Z5PUY"
-    ],
-    [
-      "高德｜海创园站（19 号线）",
-      "https://www.amap.com/place/BV11040976"
-    ],
-    [
-      "高德｜路线嵌入文档",
-      "https://lbs.amap.com/api/uri-api/guide/embedded-map/embedded-route"
-    ]
-  ],
-  "quick": [
-    [
-      "海创园地铁站（19 号线） → 红杉林参考点",
-      "https://uri.amap.com/navigation?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&mode=car&policy=0&coordinate=gaode&callnative=1"
-    ],
-    [
-      "红杉林 → 储家滩",
-      "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&mode=car&policy=0&coordinate=gaode&callnative=1"
-    ],
-    [
-      "储家滩 → 东入口",
-      "https://uri.amap.com/navigation?from=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&to=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&mode=car&policy=0&coordinate=gaode&callnative=1"
-    ],
-    [
-      "东入口 → 河沥溪老街",
-      "https://uri.amap.com/navigation?from=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&to=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&mode=car&policy=0&coordinate=gaode&callnative=1"
-    ],
-    [
-      "老街 → 海创园地铁站（19 号线）",
-      "https://uri.amap.com/navigation?from=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"
-    ],
-    [
-      "少停直返 · 红杉林 → 杭州",
-      "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"
-    ]
-  ],
-  "maps": [
-    {
-      "label": "周五 · 去程",
-      "subtitle": "海创园地铁站 → 落羽杉湿地公园；实际停车点以景区指引为准。",
-      "url": "https://www.amap.com/ssr/embed/dir?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&type=car&policy=1&maptype=roadmap&platform=pc",
-      "nav": "https://uri.amap.com/navigation?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&mode=car&policy=0&coordinate=gaode&callnative=1"
-    },
-    {
-      "label": "周六 · 青龙湾东出",
-      "subtitle": "红杉林 → 储家滩 → 川藏线东入口。临时管制时以现场为准。",
-      "url": "https://www.amap.com/ssr/embed/dir?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&type=car&policy=1&maptype=roadmap&platform=pc&via=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83",
-      "nav": "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&mode=car&policy=0&coordinate=gaode&callnative=1"
-    },
-    {
-      "label": "周六 · 完整返程",
-      "subtitle": "红杉林 → 储家滩 → 东入口 → 河沥溪老街（可跳过）→ 海创园。此图含可选午饭站。",
-      "url": "https://www.amap.com/ssr/embed/dir?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&type=car&policy=1&maptype=roadmap&platform=pc&via=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%3B118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3%3B119.008512%2C30.635336%2C%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97",
-      "nav": "https://uri.amap.com/navigation?from=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"
-    }
-  ]
-};
-
-const byId = id => document.getElementById(id);
-function node(tag, content, cls) {
-  const el = document.createElement(tag);
-  if (content != null) el.textContent = content;
-  if (cls) el.className = cls;
-  return el;
+const trip={"title": "杭州出发｜宁国红杉林自驾路线", "subtitle": "海创园地铁站 → 方塘红杉林 → 储家滩 → 皖南川藏线东入口 → 杭州", "summary": "路线分两部分：杭州进方塘；游览后沿青龙湾东出，在储家滩停一站，河沥溪老街可选。地图使用高德，按出发当日路况及现场指引行驶。", "metrics": [["出发参考", "19 号线海创园站"], ["主要景点", "方塘落羽杉湿地"], ["湖湾停靠", "储家滩"], ["返程", "宁国东出"]], "transport": [["去程", "海创园地铁站 → 宁国方塘。景区参考点不等于停车入口，请用现场公布的停车点。"], ["返程", "红杉林 → 储家滩 → 皖南川藏线东入口 → 杭州。河沥溪老街为可选午饭站。"], ["通行提示", "景区周边在秋季旺季可能限流、绕行或临时禁行；以交警公告和现场指挥为准。"]], "lodging": [], "days": [{"label": "D1", "date": "去程", "title": "杭州到方塘", "stats": "海创园 → 落羽杉湿地公园", "stops": [{"time": "去程", "kind": "自驾", "name": "海创园地铁站 → 方塘红杉林", "note": "使用景区认可的停车点；山路不占道停车。", "map": "https://uri.amap.com/navigation?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&mode=car&policy=0&coordinate=gaode&callnative=1"}], "alternative": "遇分流不走山间小路，遵照现场接驳指引。"}, {"label": "D2", "date": "游览与返程", "title": "沿青龙湾往东出山", "stats": "红杉林 → 储家滩 → 东入口 → 杭州", "stops": [{"time": "第 1 站", "kind": "景点", "name": "落羽杉湿地公园", "note": "留 35–60 分钟给开放岸线与水面倒影。水上项目须在正规运营条件允许时参加。"}, {"time": "第 2 站", "kind": "湖湾", "name": "储家滩游客服务中心", "note": "留 25–40 分钟看湖湾和山影。西津野渡码头和游客中心相邻，可顺路看，不必单独开车。", "map": "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&mode=car&policy=0&coordinate=gaode&callnative=1"}, {"time": "出山", "kind": "路线点", "name": "皖南川藏线东入口", "note": "只作方向参考；没有合法停车位就不停。", "map": "https://uri.amap.com/navigation?from=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&to=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&mode=car&policy=0&coordinate=gaode&callnative=1"}, {"time": "可选", "kind": "午饭", "name": "宁国市河沥溪老街", "note": "想多留一站可在这里午饭、走到永福桥，不停则直接返杭。", "map": "https://uri.amap.com/navigation?from=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&to=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&mode=car&policy=0&coordinate=gaode&callnative=1"}, {"time": "返程", "kind": "自驾", "name": "返回海创园", "note": "不建议为六道弯向西折返。", "map": "https://uri.amap.com/navigation?from=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"}], "alternative": "遇分流或下雨，按开放道路提前出山，跳过储家滩或老街。", "alternativeMap": "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"}], "costs": [["费用", "路桥、油电和停车以实际为准；景区项目以当天票价为准。"]], "prep": ["先查交通公告和当天的高德路况；开车不沿山路临时停车。", "随时可以点开独立高德地图查看真实道路。备用示意只按站点坐标定位，不作导航。"], "sources": [["宣城市政府｜11 月 20 日赏杉窗口", "https://www.xuancheng.gov.cn/Content/show/1738050.html"], ["宁国交警｜2026 年 11 月 20 日–12 月 13 日临时交通管制", "https://weibo.com/2/detail/5366884321201217"], ["方塘乡政府｜入林项目票答复（历史规则）", "https://www.ningguo.gov.cn/InKnowledgeBase/show/5254.html"], ["高德｜落羽杉湿地公园 POI、电话与坐标", "https://www.amap.com/place/B0GRUXBKP0"], ["宁国市住建局｜河沥溪老街", "https://www.ningguo.gov.cn/OpennessContent/show/3848972.html"], ["高德｜储家滩游客服务中心", "https://www.amap.com/place/B0H3KHYGA0"], ["高德｜皖南川藏线东入口", "https://www.amap.com/place/B0FFL4EJ6S"], ["高德｜河沥溪老街", "https://www.amap.com/place/B0LG3Z5PUY"], ["高德｜海创园站（19 号线）", "https://www.amap.com/place/BV11040976"]], "quick": [["海创园地铁站（19 号线） → 红杉林参考点", "https://uri.amap.com/navigation?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&mode=car&policy=0&coordinate=gaode&callnative=1"], ["红杉林 → 储家滩", "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&mode=car&policy=0&coordinate=gaode&callnative=1"], ["储家滩 → 东入口", "https://uri.amap.com/navigation?from=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&to=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&mode=car&policy=0&coordinate=gaode&callnative=1"], ["东入口 → 河沥溪老街", "https://uri.amap.com/navigation?from=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&to=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&mode=car&policy=0&coordinate=gaode&callnative=1"], ["老街 → 海创园地铁站（19 号线）", "https://uri.amap.com/navigation?from=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"], ["少停直返 · 红杉林 → 杭州", "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"]], "maps": [{"label": "D1 · 去程", "subtitle": "海创园地铁站 → 落羽杉湿地公园；实际停车点以景区指引为准。", "url": "https://www.amap.com/ssr/embed/dir?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&type=car&policy=1&maptype=roadmap&platform=pc", "nav": "https://uri.amap.com/navigation?from=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&to=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&mode=car&policy=0&coordinate=gaode&callnative=1"}, {"label": "青龙湾路段", "subtitle": "红杉林 → 储家滩 → 川藏线东入口。临时管制时以现场为准。", "url": "https://www.amap.com/ssr/embed/dir?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3&type=car&policy=1&maptype=roadmap&platform=pc&via=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83", "nav": "https://uri.amap.com/navigation?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83&mode=car&policy=0&coordinate=gaode&callnative=1"}, {"label": "D2 · 完整返程", "subtitle": "红杉林 → 储家滩 → 东入口 → 河沥溪老街（可跳过）→ 海创园。此图含可选午饭站。", "url": "https://www.amap.com/ssr/embed/dir?from=118.749296%2C30.471367%2C%E8%90%BD%E7%BE%BD%E6%9D%89%E6%B9%BF%E5%9C%B0%E5%85%AC%E5%9B%AD&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&type=car&policy=1&maptype=roadmap&platform=pc&via=118.892300%2C30.585133%2C%E5%82%A8%E5%AE%B6%E6%BB%A9%E6%B8%B8%E5%AE%A2%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%3B118.953619%2C30.631759%2C%E7%9A%96%E5%8D%97%E5%B7%9D%E8%97%8F%E7%BA%BF%E4%B8%9C%E5%85%A5%E5%8F%A3%3B119.008512%2C30.635336%2C%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97", "nav": "https://uri.amap.com/navigation?from=119.008512%2C30.635336%2C%E5%AE%81%E5%9B%BD%E5%B8%82%E6%B2%B3%E6%B2%A5%E6%BA%AA%E8%80%81%E8%A1%97&to=120.020641%2C30.280071%2C%E6%B5%B7%E5%88%9B%E5%9B%AD%E5%9C%B0%E9%93%81%E7%AB%99&mode=car&policy=0&coordinate=gaode&callnative=1"}]};
+const $=id=>document.getElementById(id);
+const node=(tag,text,cls)=>{const o=document.createElement(tag);if(text!=null)o.textContent=text;if(cls)o.className=cls;return o;};
+function link(label,url){const u=new URL(url);if(u.protocol!=="https:")return null;const a=node("a",label);a.href=u.href;a.target="_blank";a.rel="noopener";return a;}
+const headings=["全程路线总览","海创园 → 方塘红杉林","红杉林 → 青龙湾 → 杭州"];
+const badges=["全程","D1 · 去程","D2 · 返程"];
+const mapCards=[{label:"去程 · 海创园至方塘",i:0},{label:"青龙湾 · 红杉林至东入口",i:1},{label:"返程 · 经储家滩返回杭州",i:2}];
+let mapIndex=-1, active=0;
+function setMap(i,force=false){
+ const m=trip.maps[i],f=$("frame");if(i!==mapIndex||force){f.src=m.url;mapIndex=i;}
+ f.title="高德驾车地图 · "+mapCards[i].label;
+ $("map-status").textContent=mapCards[i].label; $("map-open").href=m.url;
 }
-function link(label, value) {
-  try {
-    const url = new URL(value);
-    if (url.protocol !== "https:" || url.username || url.password) return null;
-    const el = node("a",label); el.href=url.href; return el;
-  } catch { return null; }
+function stops(d){
+ const ul=node("ol",null,"stops");
+ for(const s of d.stops){
+  const li=node("li",null,"stop"),slot=node("div",null,"slot");
+  slot.append(node("span",s.time,"eyebrow"),node("span",s.kind,s.time==="可选"?"tag optional":"tag"));
+  li.append(slot,node("h3",s.name),node("p",s.note));
+  if(s.map)li.append(link("高德导航 ↗",s.map));
+  ul.append(li);
+ }
+ return ul;
 }
-function blocks(parent,title,rows) {
-  if (!rows.length) return;
-  parent.append(node("h3",title));
-  const div=node("div",null,"cards");
-  for (const [label,value] of rows) {
-    const card=node("div",null,"card");
-    card.append(node("strong",label),node("p",value));
-    div.append(card);
-  }
-  parent.append(div);
+function draw(i,move=false){
+ active=i;const root=$("detail"); root.replaceChildren(node("p",badges[i],"eyebrow"),node("h2",headings[i]));
+ [...$("filters").children].forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)));
+ if(i===0){
+  root.append(node("p","总览用完整返程展示主要站点，切到 D1 可单独看去程。","detail-intro"));
+  trip.days.forEach((d,j)=>{const a=node("article");a.append(node("p",badges[j+1],"eyebrow"),node("h3",d.title),node("p",d.stats));const b=node("button","查看 "+d.label);b.type="button";b.className="tag";b.addEventListener("click",()=>draw(j+1,true));a.append(b);root.append(a);});
+  root.append(node("p","自驾路况以当天高德和现场管制为准。","footnote"));
+ }else{
+  const d=trip.days[i-1];root.append(node("p",d.stats,"detail-intro"),stops(d),node("p","备选："+d.alternative,"footnote"));
+ }
+ setMap(i===1?0:2);
+ if(move && matchMedia("(min-width:761px)").matches)$("filters").scrollIntoView({block:"start",behavior:"instant"});
 }
-function dayCard(day) {
-  const article=node("article",null,"card day");
-  article.append(node("small",day.label+" · "+day.date),node("h3",day.title),node("p",day.stats,"note"));
-  const timeline=node("ol",null,"timeline");
-  for (const stop of day.stops) {
-    const item=node("li");
-    item.append(node("span",stop.time+" · "+stop.kind,"badge"),node("p",stop.name),node("p",stop.note,"note"));
-    const map=link("打开导航",stop.map); if(map) item.append(map);
-    timeline.append(item);
-  }
-  article.append(timeline);
-  if (day.alternative) article.append(node("p","备选："+day.alternative));
-  const alt=link("高德 · 打开备选路线",day.alternativeMap); if(alt) article.append(alt);
-  return article;
-}
-function overview(parent) {
-  parent.append(node("p",trip.summary));
-  blocks(parent,"大交通",trip.transport);
-  blocks(parent,"住宿",trip.lodging);
-}
-function setMap(index) {
-  const m=trip.maps[index], frame=byId("route-map");
-  if(frame.src!==m.url) frame.src=m.url;
-  frame.title="高德驾车地图 · "+m.label;
-  byId("map-context").textContent=m.subtitle;
-  byId("map-open").href=m.url;
-  byId("map-nav").href=m.nav;
-  Array.from(byId("map-tabs").children).forEach((b,i)=>b.setAttribute("aria-pressed",String(i===index)));
-}
-trip.maps.forEach((m,i)=>{
-  const b=node("button",m.label);
-  b.type="button";b.setAttribute("aria-controls","route-map");
-  b.addEventListener("click",()=>setMap(i));byId("map-tabs").append(b);
-});
-setMap(0);
-function draw(index) {
-  if(index>=0) setMap(index===0?0:1);
-  const current=byId("current"), route=byId("route");
-  current.replaceChildren(); route.replaceChildren();
-  if(index < 0) {
-    current.append(node("h2","总览")); overview(current);
-    blocks(current,"每日安排",trip.days.map(d=>[d.label+" · "+d.title,d.date+"｜"+d.stats]));
-  } else {
-    current.append(node("h2",trip.days[index].label+" 日程"),dayCard(trip.days[index]));
-  }
-  if(index<0) route.append(node("p","先选去程或返程，再在高德改为实际出发地址；现场分流优先。","note"));
-  const visible=index<0 ? trip.days : [trip.days[index]];
-  for(const day of visible) {
-    route.append(node("h3",day.label+" · "+day.title));
-    const list=node("ol",null,"route");
-    for(const stop of day.stops) {
-      const entry=node("li",stop.kind+" · "+stop.name);
-      const map=link("导航",stop.map); if(map) entry.append(" · ",map);
-      list.append(entry);
-    }
-    route.append(list);
-  }
-  Array.from(byId("switcher").children).forEach((b,i)=>b.setAttribute("aria-pressed",String(i===index+1)));
-}
-document.title=trip.title;
-byId("title").textContent=trip.title;
-byId("subtitle").textContent=trip.subtitle;
-for(const [label,url] of trip.quick){const a=link(label,url); if(a) byId("quick").append(a);}
-for(const [label,value] of trip.metrics) {
-  const card=node("div",null,"card");
-  card.append(node("small",label),node("p",value));
-  byId("metrics").append(card);
-}
-["总览",...trip.days.map(d=>d.label)].forEach((label,i)=>{
-  const b=node("button",label); b.type="button"; b.setAttribute("aria-controls","current route");
-  b.addEventListener("click",()=>draw(i-1)); byId("switcher").append(b);
-});
-const written=byId("written");
-overview(written);
-for(const day of trip.days) written.append(dayCard(day));
-blocks(written,"费用",trip.costs);
-const tasks=node("ul"); for(const t of trip.prep) tasks.append(node("li",t));
-written.append(node("h3","出发检查"),tasks);
-if(trip.sources.length) {
-  const list=node("ul");
-  for(const [label,url] of trip.sources) {
-    const a=link(label,url); if(!a) continue;
-    const item=node("li"); item.append(a); list.append(item);
-  }
-  if(list.children.length) written.append(node("h3","来源"),list);
-}
-draw(-1);
-</script>
-</body>
-</html>
+["总览","D1 去程","D2 返程"].forEach((t,i)=>{const b=node("button",t);b.type="button";b.setAttribute("aria-controls","detail map");b.addEventListener("click",()=>draw(i,true));$("filters").append(b)});
+$("all").addEventListener("click",()=>draw(0));$("fit").addEventListener("click",()=>setMap(mapIndex,true));$("bay").addEventListener("click",()=>setMap(1));
+const w=$("written");w.append(node("p","皖南秋末 · 旅行文字版","eyebrow"),node("h2",trip.title),node("p",trip.summary));
+for(const d of trip.days){const section=node("section",null,"written-box");section.append(node("h3",d.label+" · "+d.title),node("p",d.stats),stops(d),node("p","备选："+d.alternative));w.append(section);}
+w.append(node("h3","出发检查"));const prep=node("ul");for(const p of trip.prep)prep.append(node("li",p));w.append(prep,node("h3","参考与查证"));const refs=node("ul");for(const [name,url] of trip.sources){const li=node("li");li.append(link(name,url));refs.append(li)}w.append(refs);
+const isText=new URLSearchParams(location.search).get("view")==="itinerary";
+if(isText){document.body.classList.add("text-mode");$("text-link").href="./";$("text-link").textContent="← 返回地图";}
+else{draw(0);}
+</script></body></html>
