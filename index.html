@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head>
+<!doctype html><html lang="zh-CN" class="locked"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
 <title>宁国红杉林 · 皖南川藏线自驾</title>
 <style>
@@ -8,8 +8,35 @@
 @media (max-width:760px){.mast{padding:9px 10px;gap:7px;position:sticky;top:0;min-height:66px}.brand{gap:7px}.mark{width:34px;height:34px;border-radius:10px}.mark svg{width:20px}.brand h1{font-size:1.02rem}.brand p{font-size:.74rem;line-height:1.2}.mast-right .metric{display:none}.mast-right a{padding:6px;font-size:.82rem}.workspace{display:flex;flex-direction:column;height:auto;min-height:0}.map-pane{order:-1;height:clamp(300px,49svh,450px)}.rail{padding:10px 12px 24px;border:0;overflow:visible}.hero{padding:13px}.map-controls{top:7px;right:6px;max-width:58%}.map-controls button,.map-controls a{padding:4px 5px;min-height:28px;font-size:.72rem}.map-key{bottom:17px;right:6px;max-width:178px;font-size:.73rem;padding:5px 7px}.route-nav{position:sticky;top:66px;background:var(--paper);z-index:2}.metric{display:none}}
 @media print{.mast{position:static;background:white;color:#000;padding:0}.brand p{color:#444}.mark,.mast-right,.workspace,.no-print{display:none!important}.written{display:block;max-width:none;padding:0}.stop{break-inside:avoid}}
 .spot-photo{margin:9px 0 3px}.spot-photo img{display:block;width:100%;height:auto;border-radius:9px;background:#e6eee9}.spot-photo figcaption{color:var(--muted);font-size:.82rem;line-height:1.45;margin-top:5px}.spot-photo figcaption a{display:inline-block}.spot-photo figcaption a+a{margin-left:5px}.photo-source{display:block!important;margin-top:5px!important}.map-pane iframe[hidden],.map-key[hidden]{display:none}.route-nav button{font-size:.9rem}@media(max-width:760px){}.map-pane{scroll-margin-top:76px}.map-key a{width:fit-content}.map-controls button[aria-pressed=true]{background:var(--green);color:#fff}.map-key[hidden],#mountain[hidden],#west-map-links[hidden]{display:none} @media(max-width:760px){.map-pane{height:clamp(340px,54svh,490px)}.map-key{max-width:230px;bottom:8px;right:7px}}
-</style></head>
-<body><header class="mast"><div class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 3 9 18h6L6 28h11v6h6v-6h11l-9-10h6L20 3Z"/><path d="M4 37c6-3 9 2 16 0s10-1 16 0"/></svg></span><div><h1>宁国红杉林自驾</h1><p>海创园 → 方塘 → 桃岭 → 月亮湾 → 泾县东</p></div></div><div class="mast-right"><a id="text-link" href="?view=itinerary">完整文字版 →</a><div class="metric"><strong>2 天</strong><span>自驾行程</span></div><div class="metric"><strong>海创园</strong><span>起点与返程终点</span></div><div class="metric"><strong>红杉林 · 桃岭</strong><span>两处主要停靠</span></div></div></header>
+</style>
+<style>
+#access-gate{display:none}
+html.locked body>*:not(#access-gate){display:none!important}
+html.locked #access-gate{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 20% 10%,#e8f2e9,#f5f4ed 65%)}
+.access-card{width:min(100%,390px);background:#fff;border:1px solid #d7dfd3;border-radius:20px;padding:25px;box-shadow:0 12px 42px #183a2821}
+.access-card h1{margin:.25rem 0 .75rem;line-height:1.25;font-size:1.55rem}
+.access-card label{display:block;font-weight:700;margin:.9rem 0 .25rem}
+.access-card input,.access-card button{width:100%;font:inherit;border-radius:10px;padding:9px 12px;min-height:44px}
+.access-card input{border:1px solid #8ea79a;background:#fff;color:#192a23}
+.access-card button{border:1px solid #105243;background:#105243;color:white;margin-top:10px;font-weight:700}
+.access-card button:disabled{opacity:.65}
+#access-message{color:#983b26;min-height:1.6em;margin-top:6px}
+@media print{html.locked #access-gate{display:block;min-height:0;background:none}}
+</style>
+</head>
+<body>
+<section id="access-gate" aria-labelledby="access-title"><div class="access-card">
+<p class="eyebrow">皖南川藏线 · 自驾攻略</p><h1 id="access-title">宁国红杉林自驾</h1>
+<p>输入分享密码，查看路线地图和文字攻略。</p>
+<form id="access-form">
+<label for="access-code">访问密码</label>
+<input id="access-code" type="password" inputmode="numeric" autocomplete="current-password" aria-describedby="access-message" required>
+<button type="submit" id="access-button">打开攻略</button>
+<p id="access-message" role="status"></p>
+</form>
+<noscript>请启用 JavaScript 后再输入密码。</noscript>
+</div></section>
+<header class="mast"><div class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 3 9 18h6L6 28h11v6h6v-6h11l-9-10h6L20 3Z"/><path d="M4 37c6-3 9 2 16 0s10-1 16 0"/></svg></span><div><h1 tabindex="-1">宁国红杉林自驾</h1><p>海创园 → 方塘 → 桃岭 → 月亮湾 → 泾县东</p></div></div><div class="mast-right"><a id="text-link" href="?view=itinerary">完整文字版 →</a><div class="metric"><strong>2 天</strong><span>自驾行程</span></div><div class="metric"><strong>海创园</strong><span>起点与返程终点</span></div><div class="metric"><strong>红杉林 · 桃岭</strong><span>两处主要停靠</span></div></div></header>
 <main class="workspace" id="workspace">
 <aside class="rail" id="rail" aria-label="行程面板">
 <section class="hero"><p class="eyebrow">皖南秋末 · 皖南川藏线</p><h2>红杉林西出，走桃岭六道弯</h2><p>返程优先走板桥、桃岭与月亮湾，经泾县东上高速。西线遇管制或拥堵，再选宁国东出。</p><div class="duo"><div class="tile"><small>去程</small><strong>海创园 → 红杉林</strong></div><div class="tile"><small>返程</small><strong>桃岭 → 月亮湾 → 杭州</strong></div></div><div class="chips"><span class="chip">红杉林岸拍</span><span class="chip">桃岭盘山</span><span class="chip">月亮湾沿溪</span></div></section>
@@ -83,7 +110,41 @@ $("west-map-links").append(
 const w=$("written");w.append(node("p","皖南秋末 · 旅行文字版","eyebrow"),node("h2",trip.title),node("p",trip.summary));
 for(const d of trip.days){const section=node("section",null,"written-box");section.append(node("h3",d.label+" · "+d.title),node("p",d.stats),stops(d),node("p","备选："+d.alternative));w.append(section);}
 w.append(node("h3","出发检查"));const prep=node("ul");for(const p of trip.prep)prep.append(node("li",p));w.append(prep,node("h3","参考与查证"));const refs=node("ul");for(const [name,url] of trip.sources){const li=node("li");li.append(link(name,url));refs.append(li)}w.append(refs);
-const isText=new URLSearchParams(location.search).get("view")==="itinerary";
-if(isText){document.body.classList.add("text-mode");$("text-link").href="./";$("text-link").textContent="← 返回地图";}
-else{const key=new URLSearchParams(location.search).get("route");draw(({west:2,east:3,outbound:1})[key]??0);}
+
+function openItinerary(){
+ const isText=new URLSearchParams(location.search).get("view")==="itinerary";
+ if(isText){document.body.classList.add("text-mode");$("text-link").href="./";$("text-link").textContent="← 返回地图";}
+ else{const route=new URLSearchParams(location.search).get("route");draw(({west:2,east:3,outbound:1})[route]??0);}
+ document.documentElement.classList.remove("locked");
+ document.querySelector(".brand h1").focus({preventScroll:true});
+}
+const accessHash="d6d6431118812be430985d898c79d98014c1ca7a7f35db26c836f0a2b7d07d12";
+const accessKey="ningguo-roadtrip-unlocked";
+const accessInput=$("access-code");
+const accessMessage=$("access-message");
+const accessButton=$("access-button");
+function unlocked(){try{return sessionStorage.getItem(accessKey)===accessHash;}catch{return false;}}
+$("access-form").addEventListener("submit",async event=>{
+ event.preventDefault();
+ if(accessButton.disabled)return;
+ accessButton.disabled=true;
+ accessMessage.textContent="";
+ try{
+  const buffer=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(accessInput.value));
+  const hash=Array.from(new Uint8Array(buffer),n=>n.toString(16).padStart(2,"0")).join("");
+  if(hash!==accessHash){
+   accessInput.setAttribute("aria-invalid","true");
+   accessMessage.textContent="密码不对，请再试一次。";
+   accessInput.select();
+   return;
+  }
+  try{sessionStorage.setItem(accessKey,accessHash);}catch{}
+  accessInput.value="";
+  openItinerary();
+ }catch{
+  accessMessage.textContent="无法验证密码，请用 HTTPS 链接重新打开。";
+ }finally{accessButton.disabled=false;}
+});
+accessInput.addEventListener("input",()=>{accessInput.removeAttribute("aria-invalid");accessMessage.textContent="";});
+if(unlocked())openItinerary();
 </script></body></html>
