@@ -26,7 +26,8 @@ const node=(tag,text,cls)=>{const o=document.createElement(tag);if(text!=null)o.
 function link(label,url){const u=new URL(url);if(u.protocol!=="https:")return null;const a=node("a",label);a.href=u.href;a.target="_blank";a.rel="noopener";return a;}
 const headings=["全程路线总览","海创园 → 方塘红杉林","桃岭西线 · 月亮湾","宁国东出 · 备选"];
 const badges=["全程","D1 · 去程","D2 · 西出","D2 · 东出备选"];
-function setMap(i,force=false){
+let mapIndex=-1, active=0;
+ function setMap(i,force=false){
  const m=trip.maps[i], f=$("frame"), west=i>=3;
  $("offline-west").hidden=!west;
  if(i!==mapIndex||force){f.src=m.url;mapIndex=i;}
